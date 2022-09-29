@@ -29,17 +29,22 @@
 void smartHomeSystemInit()
 {
     userInterfaceInit();
-    fireAlarmInit();
-    pcSerialComInit();
+    //fireAlarmInit();
+    //pcSerialComInit();
+    newPcSerialComInit();
+    buttonInit();
 }
 
 void smartHomeSystemUpdate()
 {
-    userInterfaceUpdate();
-    fireAlarmUpdate();    
-    pcSerialComUpdate();
-    eventLogUpdate();
+    //userInterfaceUpdate();
+    //fireAlarmUpdate();    
+    //pcSerialComUpdate();
+    newUserInterfaceMatrixKeypadUpdate();    
+    newPcSerialComUpdate(); 
+    //eventLogUpdate();
     delay(SYSTEM_TIME_INCREMENT_MS);
+    showButton();
 }
 
 //=====[Implementations of private functions]==================================
