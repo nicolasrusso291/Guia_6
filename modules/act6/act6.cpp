@@ -151,3 +151,35 @@ void showButton(){
         uartUsb.write(str, strlen(str));
     }
 }
+void Keyboard_LCD ()
+    {
+    static int accumulatedDisplayTime = 0;
+    char temperatureString[3] = "";
+    
+    
+    if( accumulatedDisplayTime >=
+        DISPLAY_REFRESH_TIME_MS ) {
+
+        accumulatedDisplayTime = 0;
+
+        static int x=0 ;
+        static int y=0 ;
+        displayCharPositionWrite(x,y); //@note esto lo que hace es pararme en el display en x,y
+        char* key; //@note variable donde guarda lo que escribe el keypad puntero porque display string write pide punter
+        *key=matrixKeypadUpdate();
+        if (*key=='D'){
+            x=0;
+            y++;
+        }
+        if(*key=='C'){
+            x=0;
+            y=0;
+        }
+        displayStringWrite(key);
+        x++;
+    } else {
+        accumulatedDisplayTime =
+            accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;        
+    } 
+
+}
