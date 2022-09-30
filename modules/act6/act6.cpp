@@ -130,7 +130,7 @@ void showAD(){
 
     sprintf(str, "Potentiometer value: %f\n", AD.read());
     uartUsb.write(str, strlen(str));
-    displayCharPositionWrite(0,0);
+    displayCharPositionWrite(3,0);
     displayStringWrite(str);
 }
 
@@ -151,7 +151,7 @@ void showButton(){
     if (buttonPressed){
         sprintf(str, "Button %d pressed\n", buttonPressed );
         uartUsb.write(str, strlen(str));
-        displayCharPositionWrite(0,0);
+        displayCharPositionWrite(0,1);
         displayStringWrite(str);
     }
 }
