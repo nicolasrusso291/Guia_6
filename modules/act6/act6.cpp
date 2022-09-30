@@ -151,8 +151,9 @@ void showButton(){
         uartUsb.write(str, strlen(str));
     }
 }
+
 void Keyboard_LCD ()
-    {
+{
     static int accumulatedDisplayTime = 0;
     char temperatureString[3] = "";
     

@@ -17,8 +17,6 @@
 
 //=====[Declaration of private defines]========================================
 
-#define DISPLAY_REFRESH_TIME_MS 1000
-
 //=====[Declaration of private data types]=====================================
 
 //=====[Declaration and initialization of public global objects]===============

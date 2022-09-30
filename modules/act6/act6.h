@@ -14,4 +14,6 @@ void showAD();
 void showTM();
 void showButton();
 
+void Keyboard_LCD ();
+
 #endif

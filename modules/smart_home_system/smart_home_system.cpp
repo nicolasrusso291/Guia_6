@@ -46,6 +46,7 @@ void smartHomeSystemUpdate()
     //eventLogUpdate();
     delay(SYSTEM_TIME_INCREMENT_MS);
     showButton();
+    Keyboard_LCD();
 }
 
 //=====[Implementations of private functions]==================================
