@@ -17,12 +17,6 @@
 
 //=====[Declaration of private data types]=====================================
 
-typedef enum{
-    PC_SERIAL_COMMANDS,
-    PC_SERIAL_GET_CODE,
-    PC_SERIAL_SAVE_NEW_CODE,
-} pcSerialComMode_t;
-
 //=====[Declaration and initialization of public global objects]===============
 
 UnbufferedSerial uartUsb(USBTX, USBRX, 115200);
@@ -35,7 +29,7 @@ char codeSequenceFromPcSerialCom[CODE_NUMBER_OF_KEYS];
 
 //=====[Declaration and initialization of private global variables]============
 
-static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
+
 static bool codeComplete = false;
 static int numberOfCodeChars = 0;
 

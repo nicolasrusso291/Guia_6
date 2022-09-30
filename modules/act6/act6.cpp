@@ -5,13 +5,20 @@
 #include "act6.h"
 
 #include "code.h"
+#include "display.h"
 #include "event_log.h"
-#include "keypad.h"
-#include "pcSerial.h"
-#include "peripherals.h"
+#include "matrix_keypad.h"
+#include "pc_serial_com.h"
 #include "smart_home_system.h"
-#include "timeDate.h"
-#include "userInterface.h"
+#include "date_and_time.h"
+#include "user_interface.h"
+
+DigitalIn Button1(D13);
+DigitalIn Button2(D12);
+DigitalIn Button3(D11);
+DigitalIn Button4(D10);
+
+AnalogIn AD(A0);
 
 extern UnbufferedSerial uartUsb;
 extern DigitalIn Button1;
@@ -26,6 +33,16 @@ extern DigitalOut incorrectCodeLed;
 extern DigitalOut systemBlockedLed;
 
 extern pcSerialComMode_t pcSerialComMode;
+
+void buttonInit()
+{
+    
+    Button1.mode(PullDown);
+    Button2.mode(PullDown);
+    Button3.mode(PullDown);
+    Button4.mode(PullDown);
+
+}
 
 void newAvailableCommands()
 {
@@ -42,6 +59,54 @@ void newPcSerialComInit()
 {
     newAvailableCommands();
 }
+
+void newPcSerialComCommandUpdate( char receivedChar )
+{
+    if( receivedChar != '\0' ) {
+        switch (receivedChar) {
+            
+            case '1': 
+                ledInit();
+                strobeLight = ON;
+                ThisThread::sleep_for(500ms); 
+                break;
+            case '2': 
+                ledInit();
+                systemBlockedLed = ON; 
+                ThisThread::sleep_for(500ms);
+                break;
+            case '3': 
+                ledInit();
+                incorrectCodeLed = ON; 
+                ThisThread::sleep_for(500ms);
+                break;
+            case '4': 
+                ledInit();
+                showAD();
+                break;
+            default: 
+                ledInit();
+                matrixKeypadUpdate(); 
+                break;
+        }    
+    } 
+}
+
+void newPcSerialComUpdate()
+{
+    char receivedChar = pcSerialComCharRead();
+    if( receivedChar != '\0' ) {
+        switch ( pcSerialComMode ) {
+            case PC_SERIAL_COMMANDS:
+                newPcSerialComCommandUpdate( receivedChar );
+            break;
+            default:
+                pcSerialComMode = PC_SERIAL_COMMANDS;
+            break;
+        }
+    }    
+}
+
 
 void newUserInterfaceMatrixKeypadUpdate()
 {

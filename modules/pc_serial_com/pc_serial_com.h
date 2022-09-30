@@ -7,7 +7,15 @@
 
 //=====[Declaration of public data types]======================================
 
+typedef enum{
+    PC_SERIAL_COMMANDS,
+    PC_SERIAL_GET_CODE,
+    PC_SERIAL_SAVE_NEW_CODE,
+} pcSerialComMode_t;
+
 //=====[Declarations (prototypes) of public functions]=========================
+
+static pcSerialComMode_t pcSerialComMode = PC_SERIAL_COMMANDS;
 
 void pcSerialComInit();
 char pcSerialComCharRead();
