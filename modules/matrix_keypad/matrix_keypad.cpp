@@ -11,7 +11,7 @@
 
 #define MATRIX_KEYPAD_NUMBER_OF_ROWS    4
 #define MATRIX_KEYPAD_NUMBER_OF_COLS    4
-#define DEBOUNCE_KEY_TIME_MS        40
+#define DEBOUNCE_KEY_TIME_MS            35
 
 //=====[Declaration of private data types]=====================================
 

@@ -114,7 +114,7 @@ void newUserInterfaceMatrixKeypadUpdate()
 
     if( keyReleased != '\0' ) {
         newPcSerialComCommandUpdate( keyReleased );
-        
+        Keyboard_LCD(keyReleased);
     }
 }
 
@@ -156,12 +156,12 @@ void showButton(){
     }
 }
 
-void Keyboard_LCD ()
+void Keyboard_LCD( char receivedChar )
 {
     static int accumulatedDisplayTime = 0;
     char temperatureString[3] = "";
     
-    
+    accumulatedDisplayTime = DISPLAY_REFRESH_TIME_MS + 1 ;
     if( accumulatedDisplayTime >=
         DISPLAY_REFRESH_TIME_MS ) {
 
@@ -169,22 +169,22 @@ void Keyboard_LCD ()
 
         static int x=0 ;
         static int y=0 ;
+        char str[10];
         displayCharPositionWrite(x,y); //@note esto lo que hace es pararme en el display en x,y
-        char* key; //@note variable donde guarda lo que escribe el keypad puntero porque display string write pide punter
-        *key=matrixKeypadUpdate();
-        if (*key=='D'){
+        
+        if (receivedChar=='D'){
             x=0;
             y++;
         }
-        if(*key=='C'){
+        if(receivedChar=='C'){
             x=0;
             y=0;
         }
-        displayStringWrite(key);
-        x++;
+        sprintf(str, "B: %c", receivedChar );
+        displayStringWrite(str);
+        x++;   
     } else {
-        accumulatedDisplayTime =
-            accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;        
+        accumulatedDisplayTime = accumulatedDisplayTime + SYSTEM_TIME_INCREMENT_MS;    
     } 
 
 }
